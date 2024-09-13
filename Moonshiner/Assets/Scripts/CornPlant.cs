@@ -9,7 +9,7 @@ public class CornPlant : MonoBehaviour
     private float cornSpawnTimer;
     private float cornSpawnTimerMax = 3f;
 
-    public void PickUpCorn(int amount = 1)
+    public bool TryPickUpCorn(int amount = 1)
     {
         cornAmount -= amount;
 
@@ -17,6 +17,11 @@ public class CornPlant : MonoBehaviour
         {
             Debug.LogError("Cannot pick up any corn!");
             cornAmount = 0;
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
@@ -37,10 +42,23 @@ public class CornPlant : MonoBehaviour
                 cornAmount++;
             }
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.E))
+    public void Interact(Player player, int amount = 1)
+    {
+        Debug.Log("interanct with corn plant");
+        if (player.GetCornHeld() < player.GetCornHeldMax())
         {
-            PickUpCorn();
+            bool didPickUp = TryPickUpCorn(amount);
+            if (didPickUp)
+            {
+                player.SetCornHeld(player.GetCornHeld() + amount);
+            }
         }
+        else
+        {
+            Debug.LogError("Player cannot pick up any more corn!");
+        }
+        Debug.Log("corn held is: " + player.GetCornHeld());
     }
 }
