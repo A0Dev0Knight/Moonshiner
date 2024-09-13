@@ -45,6 +45,14 @@ public class Player : MonoBehaviour
                     cornPlant.Interact(this);
                 }
             }
+
+            if (rayHitInfo.transform.gameObject.TryGetComponent<CornBarrel>(out CornBarrel cornBarrel))
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    cornBarrel.Interact(this);
+                }
+            }
         }
     }
 }
