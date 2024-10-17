@@ -6,6 +6,7 @@ public class CornPlant : MonoBehaviour
 {
     private int cornAmount;
     private int cornAmountMax = 3;
+
     private float cornSpawnTimer;
     private float cornSpawnTimerMax = 3f;
 
@@ -27,8 +28,6 @@ public class CornPlant : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(cornAmount);
-
         if (cornAmount < cornAmountMax )
         {
             // a corn needs to be spawned
@@ -46,7 +45,6 @@ public class CornPlant : MonoBehaviour
 
     public void Interact(Player player, int amount = 1)
     {
-        Debug.Log("interanct with corn plant");
         if (player.GetCornHeld() < player.GetCornHeldMax())
         {
             bool didPickUp = TryPickUpCorn(amount);

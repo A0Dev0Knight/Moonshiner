@@ -9,13 +9,10 @@ public class CornBarrel : MonoBehaviour
 
     private float decompTimer = 5f;
     private float decompTimerMax = 5f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    private float decompCorn = 0f;
+    private float decompCornMax = 5f;
+
     void Update()
     {
         if (cornHeld == cornHeldMax)
@@ -29,14 +26,14 @@ public class CornBarrel : MonoBehaviour
                 decompTimer = decompTimerMax;
                 Debug.Log("finished decomping");
 
-                // waiting to scoop the corn back in the still
+                decompCorn = decompCornMax; // added decompedorn to be picked up by the player
             }
         }
     }
 
     public void Interact(Player player, int amount = 1)
     {
-        if (cornHeld < cornHeldMax)
+        if (cornHeld < cornHeldMax && decompCorn == 0)
         {
             if (player.GetCornHeld() > 0)
             {
@@ -44,6 +41,15 @@ public class CornBarrel : MonoBehaviour
                 player.SetCornHeld(player.GetCornHeld() - amount);
 
             }
+        }
+    }
+
+    public void InteractAlternate(Player player, int amount = 1)
+    {
+        if (decompCorn > 0)
+        {
+            decompCorn -= amount;
+            player.SetDecompedCornHeld(player.GetDecompedCornHeld() + amount);
         }
     }
 }

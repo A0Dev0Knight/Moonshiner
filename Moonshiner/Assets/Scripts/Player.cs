@@ -11,6 +11,22 @@ public class Player : MonoBehaviour
     private int cornHeld;
     private int cornHeldMax = 5;
 
+    private int decompedCornHeld;
+    private int decompedCornHeldMax = 10;
+
+    public int GetDecompedCornHeld()
+    {
+        return decompedCornHeld;
+    }
+    public int GetDecompedCornHeldMax()
+    {
+        return decompedCornHeldMax;
+    }
+
+    public void SetDecompedCornHeld(int amount)
+    {
+        decompedCornHeld = amount;
+    }
     public int GetCornHeld()
     {
         return cornHeld;
@@ -24,13 +40,7 @@ public class Player : MonoBehaviour
     {
         cornHeld = amount;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         Debug.DrawLine(interactRayStart.position, interactRayEnd.position, Color.blue);
@@ -51,6 +61,11 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     cornBarrel.Interact(this);
+                }
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    cornBarrel.InteractAlternate(this);
                 }
             }
         }
